@@ -9,6 +9,13 @@ import { ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from '../utils/consts'
 const NavBar = observer(() => {
    const {user} = useContext(Context)   
    const history = useHistory()
+
+   const logOut = () => {      
+      localStorage.setItem('token', '')
+      user.setUser({})
+      user.setIsAuth(false)
+   }
+
    return (
       <Navbar bg="dark" variant="dark">
          <Container>
@@ -23,7 +30,7 @@ const NavBar = observer(() => {
                   </Button>
                   <Button 
                      variant={'outline-light'} 
-                     onClick={() => history.push(LOGIN_ROUTE)} 
+                     onClick={() => logOut()} 
                      className='ml-2'
                   >
                      Logout
@@ -32,7 +39,7 @@ const NavBar = observer(() => {
                : <Nav className="ml-auto" style={{color: 'white'}}>
                   <Button 
                      variant={'outline-light'} 
-                     onClick={() => user.setIsAuth(true)}
+                     onClick={() => history.push(LOGIN_ROUTE)}
                   >
                      Auth
                   </Button>

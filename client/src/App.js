@@ -13,10 +13,20 @@ const App = observer(() => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    check().then(data => {
-      user.setUser(true)
-      user.setIsAuth(true)
-    }).finally(() => setLoading(false))
+    check().then(data => {  
+      if (!data) {
+        user.setUser({})
+        user.setIsAuth(false)
+      } else {        
+        user.setUser(data)
+        user.setIsAuth(true)
+      }
+    })
+    .catch((error) => {
+        console.log(error.response?.data.message ?? 'Authentication check failed') 
+      }
+    )
+    .finally(() => setLoading(false))
     // eslint-disable-next-line
   }, [])
 

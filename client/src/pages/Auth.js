@@ -15,7 +15,7 @@ const Auth = observer(() => {
    const [email, setEmail] = useState('')
    const [password, setPassword] = useState('')
 
-   const click = async () => {
+   const authHandler = async () => {
       try {
          let data
          if (isLogin) {
@@ -28,8 +28,7 @@ const Auth = observer(() => {
          history.push(SHOP_ROUTE)
       } catch (error) {
          alert(error.response.data.message)
-      }
-      
+      }      
    }
 
    return (
@@ -66,7 +65,7 @@ const Auth = observer(() => {
                   </div>}
                   <Button 
                      variant={'outline-success'}
-                     onClick={click}
+                     onClick={authHandler}
                   >
                      {isLogin ? 'Log in' : 'Register'}
                   </Button>

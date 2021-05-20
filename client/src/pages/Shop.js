@@ -25,7 +25,7 @@ const Shop = observer(() => {
    useEffect(() => {      
       fetchDevices(
          device.selectedType.id, 
-         device.selectedBrand.id, 
+         device.selectedBrand?.id ?? null, 
          device.page, 
          device.limit
       ).then(data => {
